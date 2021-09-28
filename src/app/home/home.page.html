@@ -1,27 +1,43 @@
 <ion-content [fullscreen]="true">
-  
-  <ion-fab vertical="top" horizontal="end" slot="fixed">
-    <ion-fab-button style="--background: #fff !important;">
-      <img style="width: 28px" src="./../../assets/icon/excel2.png">
-    </ion-fab-button>
-  </ion-fab>
 
-  <ion-list>
-    <ion-list-header style="color: #2e7d32;">
-      Excel Data Records
-    </ion-list-header>
+    <ion-fab vertical="top" horizontal="end" slot="fixed">
+        <ion-fab-button style="--background: #fff !important;">
+            <img style="width: 28px" src="./../../assets/icon/excel2.png">
+        </ion-fab-button>
+    </ion-fab>
 
-    <ion-item *ngFor="let rec of records, let ind = index;">
-      <ion-avatar slot="start" class="avatar">
-       {{ind}}
-      </ion-avatar>
-      <ion-label style="font-family: 'OpenSans';">
-        <h2>{{rec.name}}</h2>
-        <h3>{{rec.email}}</h3>
-        <p>{{rec.contactno}}</p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
+    <ion-list>
+        <ion-list-header style="color: #2e7d32;">
+            Excel Data Records
+        </ion-list-header>
 
- 
+        <ion-item *ngFor="let rec of recordsplit, let ind = index;">
+            <ion-avatar slot="start" class="avatar">
+                {{rec.id}}
+            </ion-avatar>
+            <ion-label style="font-family: 'OpenSans';">
+                <h2>{{rec.name}}</h2>
+                <h3>{{rec.email}}</h3>
+                <p>{{rec.contactno}}</p>
+            </ion-label>
+        </ion-item>
+    </ion-list>
+    <ion-row class="fabbuttons">
+        <ion-fab-button size="small" [disabled]="isFirstDisable" style="--background: #fff !important;" (click)="first();">
+            <img style="width: 22px" src="./../../assets/icon/first.png">
+        </ion-fab-button>
+        <ion-fab-button size="small" [disabled]="isFirstDisable" style="--background: #fff !important;" (click)="prev();">
+            <img style="width: 22px" src="./../../assets/icon/prev.png">
+        </ion-fab-button>
+        <ion-fab-button size="small" style="--background: #fff !important;">
+            <p style="color: #2e7d32;">{{currrentpage}}</p>
+        </ion-fab-button>
+        <ion-fab-button size="small" [disabled]="isLastDisable" style="--background: #fff !important;" (click)="next();">
+            <img style="width: 22px" src="./../../assets/icon/next.png">
+        </ion-fab-button>
+        <ion-fab-button size="small" [disabled]="isLastDisable" style="--background: #fff !important;" (click)="last();">
+            <img style="width: 22px" src="./../../assets/icon/last.png">
+        </ion-fab-button>
+    </ion-row>
+
 </ion-content>
