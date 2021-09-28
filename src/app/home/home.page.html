@@ -12,10 +12,10 @@
     </ion-list-header>
 
     <ion-item *ngFor="let rec of records, let ind = index;">
-      <ion-avatar slot="start">
+      <ion-avatar slot="start" class="avatar">
        {{ind}}
       </ion-avatar>
-      <ion-label>
+      <ion-label style="font-family: 'OpenSans';">
         <h2>{{rec.name}}</h2>
         <h3>{{rec.email}}</h3>
         <p>{{rec.contactno}}</p>
