@@ -1,20 +1,27 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button style="--background: #fff !important;">
+      <img style="width: 28px" src="./../../assets/icon/excel2.png">
+    </ion-fab-button>
+  </ion-fab>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <ion-list>
+    <ion-list-header style="color: #2e7d32;">
+      Excel Data Records
+    </ion-list-header>
+
+    <ion-item *ngFor="let rec of records, let ind = index;">
+      <ion-avatar slot="start">
+       {{ind}}
+      </ion-avatar>
+      <ion-label>
+        <h2>{{rec.name}}</h2>
+        <h3>{{rec.email}}</h3>
+        <p>{{rec.contactno}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+ 
 </ion-content>

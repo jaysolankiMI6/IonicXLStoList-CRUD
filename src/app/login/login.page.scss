@@ -1,0 +1,24 @@
+.content {
+    display: flex!important;
+     align-content: center!important;
+     align-items: center!important;
+}
+ion-grid{
+    height: 100%;
+}
+ion-row{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+ion-item {
+    // --background: #;
+    --color: #062f77;
+}
+ion-button {
+    --background: #062f77;
+}
+a {
+    color: #fff;
+}

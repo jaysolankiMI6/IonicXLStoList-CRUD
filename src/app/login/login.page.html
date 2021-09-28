@@ -1,0 +1,33 @@
+<ion-content padding="true" scroll="false" color="light">
+  <ion-grid>
+    <ion-row justify-content-center>
+      <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+        <form #form="ngForm" (ngSubmit)="login(form)" class="form">
+
+          <div style="text-align: center;">
+            <h3>Login</h3>
+          </div>
+          <div padding>
+            <ion-item>
+              <ion-input name="email" type="email" placeholder="your@email.com" ngModel></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input name="password" type="password" placeholder="Password" ngModel></ion-input>
+            </ion-item>
+          </div>
+          <div padding>
+            <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block">Login</ion-button>
+          </div>
+
+          <!-- <ion-row>
+        <div text-center>
+          If you don't have an account, please <a routerLink='/register'>
+            register</a> first!
+        </div>
+      </ion-row> -->
+
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
