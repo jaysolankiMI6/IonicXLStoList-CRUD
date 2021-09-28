@@ -1,0 +1,7 @@
+{
+  "name": "ionic-node-express-crud",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
