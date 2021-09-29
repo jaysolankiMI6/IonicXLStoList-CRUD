@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, NgZone } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { FileCrudService } from './../services/file-crud.service';
 
 @Component({
   selector: 'app-home',
@@ -6,9 +10,10 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  userForm: FormGroup;
+  private file: File
   currrentpage = 1;
   limit = 10;
-  lastlimit: any = 0;
   isFirstDisable = true;
   isLastDisable = false;
   public records: {
@@ -22,7 +27,20 @@ export class HomePage {
   }[] = [];
   public recordsplit = [];
 
-  constructor() {
+  constructor(private http: HttpClient, public formBuilder: FormBuilder,
+    private fileCrudService: FileCrudService,
+    private zone: NgZone,
+    private router: Router) {
+
+    this.userForm = this.formBuilder.group({
+      name: ['jay'],
+      email: ['jay@gmail.com'],
+      username: ['jaysolanki01'],
+      contactno: ['7046416652'],
+      address: ['surat'],
+      linkedinid: ['jay01'],
+      joindate: ['08/09/2021']
+    })
     for (let i = 0; i <= 99; i++) {
       this.records.push({
         id: i,
@@ -36,23 +54,43 @@ export class HomePage {
     }
     console.log('data ', this.records);
     this.isLastDisable = false;
-    this.records.forEach((element, i) => {     
-      if(i <= this.limit) {
+    this.records.forEach((element, i) => {
+      if (i <= this.limit) {
         this.recordsplit.push(element);
       }
     });
   }
-  choosefile() {
-
+  onFileChange(fileChangeEvent) {
+    this.file = fileChangeEvent.target.files[0];
+  }
+  async submitForm() {
+    let formData = new FormData();
+    formData.append("photo", this.file, this.file.name);
+    this.http.post("http://localhost:5000/upload", formData).subscribe((response) => {
+      console.log("file upload ", response);
+    });
+    this.onSubmit();
+  }
+  async onSubmit() {
+    if (!this.userForm.valid) {
+      return false;
+    } else {
+      this.fileCrudService.createFile(this.userForm.value)
+        .subscribe((response) => {
+          this.zone.run(() => {
+            this.userForm.reset();
+            this.router.navigate(['/list']);
+          })
+        });
+    }
   }
   first() {
     this.recordsplit = [];
-    // this.limit = 10;
     this.currrentpage = 1;
     this.isLastDisable = false;
     this.isFirstDisable = true;
-    this.records.forEach((element, i) => {     
-      if(i <= this.limit) {
+    this.records.forEach((element, i) => {
+      if (i <= this.limit) {
         this.recordsplit.push(element);
       }
     });
@@ -62,17 +100,14 @@ export class HomePage {
     this.isLastDisable = false;
     this.currrentpage = this.currrentpage - 1;
     let limit = this.limit * this.currrentpage;
-    this.lastlimit = limit - 10;
-    console.log("limit ",limit);
-    console.log("lastlimit ",this.lastlimit);
-    this.records.forEach((element, i) => {     
-      if(i > this.lastlimit  && i <= limit) {
+    this.records.forEach((element, i) => {
+      if (i > limit - 10 && i <= limit) {
         this.recordsplit.push(element);
       }
     });
-    if(this.lastlimit <= 0){
+    if (limit - 10 <= 0) {
       this.isFirstDisable = true;
-    }else{
+    } else {
       this.isFirstDisable = false;
     }
   }
@@ -80,35 +115,29 @@ export class HomePage {
     this.recordsplit = [];
     this.isFirstDisable = false;
     this.currrentpage = this.currrentpage + 1;
-    let limit = this.limit * this.currrentpage;    
-    this.lastlimit = this.lastlimit + 10;
-    this.records.forEach((element, i) => {     
-      if(i > this.lastlimit  && i <= limit) {
+    let limit = this.limit * this.currrentpage;
+    this.records.forEach((element, i) => {
+      if (i > limit - 10 && i <= limit) {
         this.recordsplit.push(element);
       }
     });
-    if(limit >= this.records.length){
+    if (limit >= this.records.length) {
       this.isLastDisable = true;
-    }else{
+    } else {
       this.isLastDisable = false;
     }
-   
+
   }
   last() {
     this.recordsplit = [];
     this.isFirstDisable = false;
     this.isLastDisable = true;
-    console.log("total ",this.records.length);
     this.currrentpage = Math.ceil((this.records.length / 10));
-    console.log("last currentpage ",this.currrentpage);
-    this.limit = ((this.currrentpage-1) * this.limit) + 1;
-    console.log("limit ",this.limit);
-    this.records.forEach((element, i) => {     
-      if(this.limit <= i) {
-        console.log(i);
+    let limit = ((this.currrentpage - 1) * this.limit) + 1;
+    this.records.forEach((element, i) => {
+      if (limit <= i) {
         this.recordsplit.push(element);
       }
     });
-    console.log("records ",this.recordsplit);
   }
 }

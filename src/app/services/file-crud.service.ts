@@ -64,6 +64,14 @@ export class FileCrudService {
       );
   }
 
+  // uploadFile() {
+  //   return this.httpClient.post('http://localhost:5000/api/upload/', formData)
+  //     .pipe(
+  //         tap(_ => console.log('File Deleted ${id}')),
+  //         catchError(this.handleError<File[]>('Delete File'))
+  //     );
+  // }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);

@@ -2,10 +2,11 @@
 
     <ion-fab vertical="top" horizontal="end" slot="fixed">
         <ion-fab-button style="--background: #fff !important;">
-            <img style="width: 28px" src="./../../assets/icon/excel2.png">
+            <input type="file" (change)="onFileChange($event)" />
+            <!-- <img style="width: 28px" src="./../../assets/icon/excel2.png"> -->
         </ion-fab-button>
     </ion-fab>
-
+    <ion-button color="primary" expand="full" (click)="submitForm()">Upload</ion-button>
     <ion-list>
         <ion-list-header style="color: #2e7d32;">
             Excel Data Records
