@@ -2,10 +2,23 @@
 
     <ion-fab vertical="top" horizontal="end" slot="fixed">
         <ion-fab-button style="--background: #fff !important;">
-            <input type="file" (change)="onFileChange($event)" />
+            <input type="file" name="file" (change)="onFileChange($event)" />
             <!-- <img style="width: 28px" src="./../../assets/icon/excel2.png"> -->
+
         </ion-fab-button>
+
     </ion-fab>
+    <!-- <form action="http://localhost:3000/upload" method="post" enctype="multipart/form-data" style="margin-top: 15px;">
+        <input type="file" name="file" style="margin-top: 15px;" />
+        
+        <input type="submit" value="Upload" name="submit" style="margin-top: 15px;">
+    </form>
+    <ion-item>
+        <button ion-button (click)="uploadFile()">Upload</button>
+      </ion-item> -->
+    <ion-item>
+        <input type="file" (change)="onFileChange($event)" />
+    </ion-item>
     <ion-button color="primary" expand="full" (click)="submitForm()">Upload</ion-button>
     <ion-list>
         <ion-list-header style="color: #2e7d32;">
@@ -24,19 +37,23 @@
         </ion-item>
     </ion-list>
     <ion-row class="fabbuttons">
-        <ion-fab-button size="small" [disabled]="isFirstDisable" style="--background: #fff !important;" (click)="first();">
+        <ion-fab-button size="small" [disabled]="isFirstDisable" style="--background: #fff !important;"
+            (click)="first();">
             <img style="width: 22px" src="./../../assets/icon/first.png">
         </ion-fab-button>
-        <ion-fab-button size="small" [disabled]="isFirstDisable" style="--background: #fff !important;" (click)="prev();">
+        <ion-fab-button size="small" [disabled]="isFirstDisable" style="--background: #fff !important;"
+            (click)="prev();">
             <img style="width: 22px" src="./../../assets/icon/prev.png">
         </ion-fab-button>
         <ion-fab-button size="small" style="--background: #fff !important;">
             <p style="color: #2e7d32;">{{currrentpage}}</p>
         </ion-fab-button>
-        <ion-fab-button size="small" [disabled]="isLastDisable" style="--background: #fff !important;" (click)="next();">
+        <ion-fab-button size="small" [disabled]="isLastDisable" style="--background: #fff !important;"
+            (click)="next();">
             <img style="width: 22px" src="./../../assets/icon/next.png">
         </ion-fab-button>
-        <ion-fab-button size="small" [disabled]="isLastDisable" style="--background: #fff !important;" (click)="last();">
+        <ion-fab-button size="small" [disabled]="isLastDisable" style="--background: #fff !important;"
+            (click)="last();">
             <img style="width: 22px" src="./../../assets/icon/last.png">
         </ion-fab-button>
     </ion-row>

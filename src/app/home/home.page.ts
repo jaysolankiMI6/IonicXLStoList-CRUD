@@ -3,6 +3,8 @@ import { Component, NgZone } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FileCrudService } from './../services/file-crud.service';
+// import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
+import { LoadingController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -26,10 +28,14 @@ export class HomePage {
     joindate: String
   }[] = [];
   public recordsplit = [];
-
+  imageURI: any;
+  imageFileName: any;
   constructor(private http: HttpClient, public formBuilder: FormBuilder,
     private fileCrudService: FileCrudService,
     private zone: NgZone,
+    public toastCtrl: ToastController,
+    public loadingCtrl: LoadingController,
+    // private transfer: FileTransfer,
     private router: Router) {
 
     this.userForm = this.formBuilder.group({
@@ -60,16 +66,45 @@ export class HomePage {
       }
     });
   }
+  getImage() {
+   
+  }
+  uploadFile() {
+    // let loader = this.loadingCtrl.create({
+    //   content: "Uploading..."
+    // });
+    // loader.present();
+    // const fileTransfer: FileTransferObject = this.transfer.create();
+  
+    // let options: FileUploadOptions = {
+    //   fileKey: 'ionicfile',
+    //   fileName: 'ionicfile',
+    //   chunkedMode: false,
+    //   mimeType: "image/jpeg",
+    //   headers: {}
+    // }
+  
+    // fileTransfer.upload(this.imageURI, 'http://192.168.0.7:8080/api/uploadImage', options)
+    //   .then((data) => {
+    //   console.log(data+" Uploaded Successfully");
+    //   this.imageFileName = "http://192.168.0.7:8080/static/images/ionicfile.jpg"
+    //   // loader.dismiss();
+    //   this.presentToast("Image uploaded successfully");
+    // }, (err) => {
+    //   console.log(err);
+    //   // loader.dismiss();
+    //   this.presentToast(err);
+    // });
+  }
   onFileChange(fileChangeEvent) {
     this.file = fileChangeEvent.target.files[0];
   }
   async submitForm() {
     let formData = new FormData();
-    formData.append("photo", this.file, this.file.name);
-    this.http.post("http://localhost:5000/upload", formData).subscribe((response) => {
-      console.log("file upload ", response);
+    formData.append("file", this.file, this.file.name);
+    this.http.post("http://192.168.56.1:3000/upload", formData).subscribe((response) => {
+      console.log("response ",response);
     });
-    this.onSubmit();
   }
   async onSubmit() {
     if (!this.userForm.valid) {
@@ -139,5 +174,12 @@ export class HomePage {
         this.recordsplit.push(element);
       }
     });
+  }
+  async presentToast(msg) {
+    const toast = await this.toastCtrl.create({
+      message: msg,
+      duration: 2000
+    });
+    toast.present();
   }
 }

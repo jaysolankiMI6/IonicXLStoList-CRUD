@@ -20,14 +20,15 @@ fileRoute.route('/').get((req, res) => {
 })
 
 fileRoute.route('/create-file').post((req, res, next) => {
-    FileModel.create(req.body, (err, file) => {
-        if (err) {
-            return next(err)
-        } else {
-            res.json(file);
-            console.log('File Created');
-        }
-    })
+    // FileModel.create(req.body, (err, file) => {
+    console.log("req ",req.body);
+    if (err) {
+        return next(err)
+    } else {
+        res.json(file);
+        console.log('File Created');
+    }
+    // })
 })
 
 fileRoute.route('/fetch-file/:id').get((req, res) => {
@@ -93,7 +94,7 @@ app.post('/upload', upload.single('image'), (req, res, next) => {
         res.status(201).send({ newImage });
     });
 });
- 
+
 // Get all uploaded images
 app.get('/images', (req, res, next) => {
     // use lean() to get a plain JS object
@@ -102,7 +103,7 @@ app.get('/images', (req, res, next) => {
         if (err) {
             res.sendStatus(400);
         }
- 
+
         // Manually set the correct URL to each image
         for (let i = 0; i < images.length; i++) {
             var img = images[i];
@@ -111,11 +112,11 @@ app.get('/images', (req, res, next) => {
         res.json(images);
     })
 });
- 
+
 // Get one image by its ID
 app.get('/images/:id', (req, res, next) => {
     let imgId = req.params.id;
- 
+
     Image.findById(imgId, (err, image) => {
         if (err) {
             res.sendStatus(400);
@@ -125,16 +126,16 @@ app.get('/images/:id', (req, res, next) => {
         fs.createReadStream(path.join(UPLOAD_PATH, image.filename)).pipe(res);
     })
 });
- 
+
 // Delete one image by its ID
 app.delete('/images/:id', (req, res, next) => {
     let imgId = req.params.id;
- 
+
     Image.findByIdAndRemove(imgId, (err, image) => {
         if (err && image) {
             res.sendStatus(400);
         }
- 
+
         del([path.join(UPLOAD_PATH, image.filename)]).then(deleted => {
             res.sendStatus(200);
         })
