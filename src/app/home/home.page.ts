@@ -102,7 +102,7 @@ export class HomePage {
   async submitForm() {
     let formData = new FormData();
     formData.append("file", this.file, this.file.name);
-    this.http.post("http://192.168.56.1:3000/upload", formData).subscribe((response) => {
+    this.http.post("http://192.168.1.123:3000/upload", formData).subscribe((response) => {
       console.log("response ",response);
     });
   }

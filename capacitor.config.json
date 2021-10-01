@@ -2,5 +2,7 @@
 	"appId": "io.ionic.starter",
 	"appName": "ionic-node-express-crud",
 	"webDir": "www",
-	"bundledWebRuntime": false
+	"bundledWebRuntime": false,
+	"cleartext": true,
+	"url": "http://192.168.1.123:3000"	
 }

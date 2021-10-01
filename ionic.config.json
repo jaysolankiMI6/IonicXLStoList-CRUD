@@ -6,5 +6,11 @@
     },
     "cordova": {}
   },
-  "type": "angular"
+  "type": "angular",
+  "proxies": [
+    {
+      "path": "/upload",
+      "proxyUrl": "http://192.168.1.123:3000/upload"
+    }
+  ]
 }
