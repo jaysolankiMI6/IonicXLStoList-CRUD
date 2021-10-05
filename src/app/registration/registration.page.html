@@ -2,12 +2,15 @@
   <ion-grid>
     <ion-row justify-content-center>
       <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
-        <form [formGroup]="loginForm" (ngSubmit)="login(form)" class="form">
+        <form [formGroup]="userForm" (ngSubmit)="register(form)" class="form">
 
           <div style="text-align: center;">
             <h3>Login</h3>
           </div>
           <div padding>
+            <ion-item>
+              <ion-input formControlName="name" type="text" placeholder="Name"  required></ion-input>
+            </ion-item>
             <ion-item>
               <ion-input formControlName="email" type="email" placeholder="your@email.com" required></ion-input>
             </ion-item>
@@ -16,7 +19,7 @@
             </ion-item>
           </div>
           <div padding>
-            <ion-button size="large" type="submit" expand="block">Login</ion-button>
+            <ion-button size="large" type="submit" expand="block">Register</ion-button>
           </div>
 
           <ion-row>

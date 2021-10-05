@@ -1,25 +1,16 @@
 <ion-content [fullscreen]="true">
+    <ion-row>
+        <ion-col>
+            <div class="fileUpload btn btn-primary">
+                <span style="color : #2e7d32">Select ExcelSheet</span>
+                <input type="file" class="upload" (change)="onFileChange($event)" />
+            </div>
+        </ion-col>
+        <ion-col>
+            <ion-button color="danger" [disabled]="!file" (click)="submitForm()">Upload Sheet</ion-button>
+        </ion-col>
+    </ion-row>
 
-    <ion-fab vertical="top" horizontal="end" slot="fixed">
-        <ion-fab-button style="--background: #fff !important;">
-            <input type="file" name="file" (change)="onFileChange($event)" />
-            <!-- <img style="width: 28px" src="./../../assets/icon/excel2.png"> -->
-
-        </ion-fab-button>
-
-    </ion-fab>
-    <!-- <form action="http://localhost:3000/upload" method="post" enctype="multipart/form-data" style="margin-top: 15px;">
-        <input type="file" name="file" style="margin-top: 15px;" />
-        
-        <input type="submit" value="Upload" name="submit" style="margin-top: 15px;">
-    </form>
-    <ion-item>
-        <button ion-button (click)="uploadFile()">Upload</button>
-      </ion-item> -->
-    <ion-item>
-        <input type="file" (change)="onFileChange($event)" />
-    </ion-item>
-    <ion-button color="primary" expand="full" (click)="submitForm()">Upload</ion-button>
     <ion-list>
         <ion-list-header style="color: #2e7d32;">
             Excel Data Records
@@ -27,7 +18,7 @@
 
         <ion-item *ngFor="let rec of recordsplit, let ind = index;">
             <ion-avatar slot="start" class="avatar">
-                {{rec.id}}
+                {{ind}}
             </ion-avatar>
             <ion-label style="font-family: 'OpenSans';">
                 <h2>{{rec.name}}</h2>
