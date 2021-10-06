@@ -1,3 +1,14 @@
+<ion-header class="ion-no-border">
+    <ion-toolbar>
+        <ion-title class="title">Excel Records List</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="logout();">
+                <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
 <ion-content [fullscreen]="true">
     <ion-row>
         <ion-col>
@@ -10,43 +21,59 @@
             <ion-button color="danger" [disabled]="!file" (click)="submitForm()">Upload Sheet</ion-button>
         </ion-col>
     </ion-row>
-
-    <ion-list>
-        <ion-list-header style="color: #2e7d32;">
-            Excel Data Records
-        </ion-list-header>
-
-        <ion-item *ngFor="let rec of recordsplit, let ind = index;">
-            <ion-avatar slot="start" class="avatar">
-                {{ind}}
-            </ion-avatar>
-            <ion-label style="font-family: 'OpenSans';">
-                <h2>{{rec.name}}</h2>
-                <h3>{{rec.email}}</h3>
-                <p>{{rec.contactno}}</p>
-            </ion-label>
-        </ion-item>
+    <ion-img class="img" *ngIf="records !== null" src="assets/icon/norecord.png"></ion-img>
+    <ion-list *ngIf="records">
+        <ion-card *ngFor="let rec of recordsplit, let ind = index;">
+            <ion-card-header>
+                <ion-card-title>{{rec.name}}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content style="padding: 0;">
+                <ion-item>
+                    <ion-row class="row">
+                        <ion-col>
+                            <p>
+                                <ion-img class="icon" src="assets/icon/call.png"></ion-img>{{rec.contactno}}
+                            </p>
+                            <p>
+                                <ion-img class="icon" src="assets/icon/pin.png"></ion-img>{{rec.address}}
+                            </p>
+                        </ion-col>
+                        <ion-col>
+                            <p>
+                                <ion-img class="icon" src="assets/icon/linkedin.png"></ion-img>{{rec.linkdinid}}
+                            </p>
+                            <p>
+                                <ion-img class="icon" src="assets/icon/gmail.png"></ion-img>{{rec.email}}
+                            </p>
+                        </ion-col>
+                    </ion-row>
+                </ion-item>
+            </ion-card-content>
+        </ion-card>
     </ion-list>
-    <ion-row class="fabbuttons">
-        <ion-fab-button size="small" [disabled]="isFirstDisable" style="--background: #fff !important;"
-            (click)="first();">
-            <img style="width: 22px" src="./../../assets/icon/first.png">
-        </ion-fab-button>
-        <ion-fab-button size="small" [disabled]="isFirstDisable" style="--background: #fff !important;"
-            (click)="prev();">
-            <img style="width: 22px" src="./../../assets/icon/prev.png">
-        </ion-fab-button>
-        <ion-fab-button size="small" style="--background: #fff !important;">
-            <p style="color: #2e7d32;">{{currrentpage}}</p>
-        </ion-fab-button>
-        <ion-fab-button size="small" [disabled]="isLastDisable" style="--background: #fff !important;"
-            (click)="next();">
-            <img style="width: 22px" src="./../../assets/icon/next.png">
-        </ion-fab-button>
-        <ion-fab-button size="small" [disabled]="isLastDisable" style="--background: #fff !important;"
-            (click)="last();">
-            <img style="width: 22px" src="./../../assets/icon/last.png">
-        </ion-fab-button>
-    </ion-row>
-
 </ion-content>
+<ion-footer class="ion-no-border">
+    <ion-toolbar>
+        <ion-row class="fabbuttons">
+            <ion-fab-button size="small" [disabled]="isFirstDisable" style="--background: #fff !important;"
+                (click)="first();">
+                <img style="width: 22px" src="./../../assets/icon/first.png">
+            </ion-fab-button>
+            <ion-fab-button size="small" [disabled]="isFirstDisable" style="--background: #fff !important;"
+                (click)="prev();">
+                <img style="width: 22px" src="./../../assets/icon/prev.png">
+            </ion-fab-button>
+            <ion-fab-button size="small" style="--background: #fff !important;">
+                <p style="color: #2e7d32;">{{currrentpage}}</p>
+            </ion-fab-button>
+            <ion-fab-button size="small" [disabled]="isLastDisable" style="--background: #fff !important;"
+                (click)="next();">
+                <img style="width: 22px" src="./../../assets/icon/next.png">
+            </ion-fab-button>
+            <ion-fab-button size="small" [disabled]="isLastDisable" style="--background: #fff !important;"
+                (click)="last();">
+                <img style="width: 22px" src="./../../assets/icon/last.png">
+            </ion-fab-button>
+        </ion-row>
+    </ion-toolbar>
+</ion-footer>

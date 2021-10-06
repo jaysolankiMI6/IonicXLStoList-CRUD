@@ -1,0 +1,31 @@
+.img{
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    top: 15%;
+    transform: translateY(-50%);
+    height: 100px;
+    width: 100px;
+}
+ion-grid{
+    height: 100%;
+}
+ion-row{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+ion-item {
+    // --background: #;
+    --color: #2e7d32;
+}
+ion-button {
+    --background: #2e7d32;
+    padding: 10px;
+    margin: 5px;
+}
+a {
+    color: #2e7d32;
+}

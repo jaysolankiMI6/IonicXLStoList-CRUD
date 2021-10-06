@@ -1,12 +1,9 @@
 <ion-content padding="true" scroll="false" color="light">
   <ion-grid>
+    <ion-img class="img" src="assets/icon/excel2.png"></ion-img>
     <ion-row justify-content-center>
       <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
         <form [formGroup]="loginForm" (ngSubmit)="login(form)" class="form">
-
-          <div style="text-align: center;">
-            <h3>Login</h3>
-          </div>
           <div padding>
             <ion-item>
               <ion-input formControlName="email" type="email" placeholder="your@email.com" required></ion-input>
@@ -20,11 +17,11 @@
           </div>
 
           <ion-row>
-        <div text-center>
-          If you don't have an account, please <a routerLink='/registration'>
-            register</a> first!
-        </div>
-      </ion-row>
+            <div text-center class="singuplink">
+              If you don't have an account, please <a routerLink='/registration' style="color:#2e7d32">
+                register</a> first!
+            </div>
+          </ion-row>
 
         </form>
       </ion-col>

@@ -22,7 +22,7 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
   login(){
-    this.http.post("http://192.168.1.123:3000/auth", this.loginForm.value).subscribe((response: any) => {
+    this.http.post("http://192.168.2.211:3000/auth", this.loginForm.value).subscribe((response: any) => {
       console.log("response ", response);
       if (response.statuscode == 200) {
         this.presentToast(response.message);

@@ -22,7 +22,7 @@ export class RegistrationPage implements OnInit {
   ngOnInit() {
   }
   register(){
-    this.http.post("http://192.168.1.123:3000/registration", this.userForm.value).subscribe((response: any) => {
+    this.http.post("http://192.168.2.211:3000/registration", this.userForm.value).subscribe((response: any) => {
       console.log("response ", response);
       if (response.statuscode == 200) {
         this.presentToast(response.message);
@@ -32,6 +32,8 @@ export class RegistrationPage implements OnInit {
           }
         };
         this.router.navigateByUrl('/login', navigationExtras);
+      }else{
+        this.presentToast(response.message);
       }
     });
     // this.router.navigateByUrl('/login');

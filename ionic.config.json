@@ -9,8 +9,16 @@
   "type": "angular",
   "proxies": [
     {
+      "path": "/registration",
+      "proxyUrl": "http://192.168.2.211:3000/registration"
+    },
+    {
+      "path": "/auth",
+      "proxyUrl": "http://192.168.2.211:3000/auth"
+    },
+    {
       "path": "/upload",
-      "proxyUrl": "http://192.168.1.123:3000/upload"
+      "proxyUrl": "http://192.168.2.211:3000/upload"
     }
   ]
 }

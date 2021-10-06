@@ -42,7 +42,7 @@ export class HomePage {
     private router: Router,
     private route: ActivatedRoute) {
     this.route.queryParams.subscribe(params => {
-      console.log("params ",params)
+      console.log("params ", params)
       if (params && params.username && params.userid) {
         this.username = params.username;
         this.userid = params.userid;
@@ -73,14 +73,19 @@ export class HomePage {
     console.log("userid ", this.userid);
     formData.append("userid", this.userid);
     formData.append("file", this.file, this.file.name);
-    this.http.post("http://192.168.1.123:3000/upload", formData).subscribe((response: any) => {
+    this.http.post("http://192.168.2.211:3000/upload", formData).subscribe((response: any) => {
       console.log("response ", response);
       if (response.errorcode == 200) {
+        this.file = null;
         console.log('data ', this.records);
-        this.records = response.data;
         this.presentToast(response.message);
+        if (response.data) {
+          this.records = [];
+          this.recordsplit = [];
+          this.records = response.data;
+        }
         this.records.forEach((element, i) => {
-          console.log("i "+i+ "limit  " +this.limit);
+          console.log("i " + i + "limit  " + this.limit);
           if (i < this.limit) {
             this.recordsplit.push(element);
           }
@@ -88,7 +93,7 @@ export class HomePage {
       }
     });
   }
-  
+
   first() {
     this.recordsplit = [];
     this.currrentpage = 1;
@@ -151,5 +156,11 @@ export class HomePage {
       duration: 2000
     });
     toast.present();
+  }
+  logout() {
+    this.records = [];
+    this.recordsplit = [];
+    localStorage.clear();
+    this.router.navigate(['login']);
   }
 }
